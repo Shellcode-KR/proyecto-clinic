@@ -6,12 +6,15 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -42,13 +45,16 @@ public class Usuario implements Serializable {
     @Size(max = 45)
     @Column(name = "contrasena")
     private String contrasena;
-    @Size(max = 45)
-    @Column(name = "tipo_usuario")
-    private String tipoUsuario;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 60)
     @Column(name = "email")
     private String email;
+    @JoinColumn(name = "tipo_usuario", referencedColumnName = "idtipo_usuario")
+    @ManyToOne
+    private TipoUsuario tipoUsuario;
+    @Size(max = 45)
+    @Column(name = "tipo_usuario")
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,14 +81,6 @@ public class Usuario implements Serializable {
     }
 
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
 
     @XmlTransient
     public List<Medico> getMedicoList() {
@@ -101,17 +99,24 @@ public class Usuario implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Usuario other = (Usuario) object;
-        if ((this.idusuario == null && other.idusuario != null) || (this.idusuario != null && !this.idusuario.equals(other.idusuario))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        return Objects.equals(this.idusuario, other.idusuario);
     }
+
+    
 
     @Override
     public String toString() {
@@ -140,6 +145,14 @@ public class Usuario implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
     
 }

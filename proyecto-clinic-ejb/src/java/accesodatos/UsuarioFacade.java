@@ -4,9 +4,11 @@
  */
 package accesodatos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import modelo.Usuario;
 
 /**
@@ -26,6 +28,12 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    public List<Usuario> getUsuariosbyTipo(int idtipousuario) {
+        TypedQuery<Usuario> query = em.createQuery(
+            "SELECT u FROM Usuario u WHERE u.tipoUsuario.idtipoUsuario = :idtipousuario", Usuario.class);
+        query.setParameter("idtipousuario", idtipousuario);
+        return query.getResultList();
     }
     
 }

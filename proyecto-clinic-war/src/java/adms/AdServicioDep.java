@@ -34,6 +34,16 @@ public class AdServicioDep implements Serializable {
     private Servicios servicio;
     private Departamento departamento;
 
+    private List<Servicios> serviciosDepartamento;
+
+    public List<Servicios> getServiciosDepartamento() {
+        return serviciosDepartamento;
+    }
+
+    public void setServiciosDepartamento(List<Servicios> serviciosDepartamento) {
+        this.serviciosDepartamento = serviciosDepartamento;
+    }
+
     public Departamento getDepartamento() {
         return departamento;
     }
@@ -41,7 +51,6 @@ public class AdServicioDep implements Serializable {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
-    
 
     public Servicios getServicio() {
         return servicio;
@@ -50,21 +59,30 @@ public class AdServicioDep implements Serializable {
     public void setServicio(Servicios servicio) {
         this.servicio = servicio;
     }
-    public List<Servicios> getServiciosClinica(){
+
+    public List<Servicios> getServiciosClinica() {
         return lnServiciosDep.getServicios();
     }
-    
-    
-    public void agregarServicio(){
-        departamento = lnDepartamentos.findDepartamento(departamento.getIddepartamento());
+
+    public void getServiciosbyDepartamentoID(int idDepartamento) {
+        serviciosDepartamento = lnServiciosDep.getServiciosByDepartamentoId(idDepartamento);
+    }
+
+    public void agregarServicio() {
+        listaServicioDepartamento();
         servicio.setDepartamento(departamento);
         lnServiciosDep.addServicio(servicio);
-        servicio=new Servicios();
+        servicio = new Servicios();
     }
-    
+
+    public void listaServicioDepartamento() {
+        departamento = lnDepartamentos.findDepartamento(departamento.getIddepartamento());
+        getServiciosbyDepartamentoID(departamento.getIddepartamento());
+    }
+
     public AdServicioDep() {
-        servicio=new Servicios();
-        departamento= new Departamento();
+        servicio = new Servicios();
+        departamento = new Departamento();
     }
-    
+
 }

@@ -31,5 +31,11 @@ public class ServiciosFacade extends AbstractFacade<Servicios> {
     public ServiciosFacade() {
         super(Servicios.class);
     }
+    public List<Servicios> obtenerServiciosPorDepartamento(int departamentoId) {
+        TypedQuery<Servicios> query = em.createQuery(
+            "SELECT s FROM Servicios s WHERE s.departamento.iddepartamento = :departamentoId", Servicios.class);
+        query.setParameter("departamentoId", departamentoId);
+        return query.getResultList();
+    }
     
 }

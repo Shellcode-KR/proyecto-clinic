@@ -29,10 +29,13 @@ public class LnServiciosDep {
     public void addServicio(Servicios s){
         serviciosFacade.create(s);
     }
-    public void findServicio(int idServicio){
-        serviciosFacade.find(idServicio);
+    public Servicios findServicio(int idServicio){
+        return serviciosFacade.find(idServicio);
     }
     public void updateServicio(Servicios s){
         serviciosFacade.edit(s);
+    }
+    public List<Servicios> getServiciosByDepartamentoId(int idDepartamento){
+        return serviciosFacade.obtenerServiciosPorDepartamento(idDepartamento);
     }
 }

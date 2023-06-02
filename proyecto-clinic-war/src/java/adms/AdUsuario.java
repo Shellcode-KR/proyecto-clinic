@@ -7,6 +7,7 @@ package adms;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -40,31 +41,32 @@ public class AdUsuario implements Serializable {
     public Departamento getDepartamento() {
         return departamento;
     }
-    
 
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
-    
-    public void nuevoMedico(){
+
+    public void nuevoMedico() {
         nuevoUsuario();
         departamento = lnDepartamentos.findDepartamento(departamento.getIddepartamento());
-        medico.setDepartamentoList((List<Departamento>) departamento);
-        usuarioaux= lnUsuario.getUltimoUsuario();
-        medico.setIdUsuario(usuario);
+        medico.setIdDepartamento(departamento);
+        usuarioaux = lnUsuario.getUltimoUsuario();
+        medico.setIdUsuario(usuarioaux);
         lnMedico.addMedico(medico);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Médico creado con éxito", "El médico ha sido creado exitosamente."));
-        medico= new Medico();
-        
+        medico = new Medico();
+
     }
-    
+
     private Usuario usuario;
     private Usuario usuarioaux;
     private TipoUsuario tipousuario;
     private List<TipoUsuario> tiposusuarios;
-    public List<TipoUsuario> getRecuperartipos(){
+
+    public List<TipoUsuario> getRecuperartipos() {
         return lnUsuario.getTipoUsuarios();
     }
+
     public TipoUsuario getTipousuario() {
         return tipousuario;
     }
@@ -78,24 +80,24 @@ public class AdUsuario implements Serializable {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
-    
-    
+
     public void setTipousuario(TipoUsuario tipousuario) {
         this.tipousuario = tipousuario;
     }
-    
-    public void listatablatipo(){
-        usuariostipo =lnUsuario.getUsuariobyTipo(tipousuario.getIdtipoUsuario());
+
+    public void listatablatipo() {
+        usuariostipo = lnUsuario.getUsuariobyTipo(tipousuario.getIdtipoUsuario());
     }
     //Abajo no tocar
     private List<Usuario> usuariostipo;
+
     public List<Usuario> getUsuariostipo() {
         return usuariostipo;
     }
+
     public void setUsuariostipo(List<Usuario> usuariostipo) {
         this.usuariostipo = usuariostipo;
     }
-    
 
     public Usuario getUsuarioaux() {
         return usuarioaux;
@@ -112,9 +114,10 @@ public class AdUsuario implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
     public String login() {
         usuarioaux = lnUsuario.findUsuarioBynombre(usuario.getUsuario());
-        
+
         if (usuarioaux == null) {
             // El usuario no existe, mostrar mensaje de error
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no encontrado", "El usuario ingresado no existe"));
@@ -123,43 +126,43 @@ public class AdUsuario implements Serializable {
             if (usuarioaux.getContrasena().equals(usuario.getContrasena())) {
                 // Inicio de sesión exitoso
                 //return "home.xhtml"; // Redireccionar a la página de inicio después del inicio de sesión
-                usuario=usuarioaux;
-                
-                if(usuarioaux.getTipoUsuario().getIdtipoUsuario()==1){
+                usuario = usuarioaux;
+
+                if (usuarioaux.getTipoUsuario().getIdtipoUsuario() == 1) {
                     usuarioaux = new Usuario();
                     return "vistas/admin";
-                }else{
+                } else {
                     usuarioaux = new Usuario();
                     return "vistas/medico";
                 }
-                
+
             } else {
                 // Contraseña incorrecta, mostrar mensaje de error
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña incorrecta", "La contraseña ingresada es incorrecta"));
                 return null; // Permanecer en la página de inicio de sesión
             }
-            
+
         }
-        
+
     }
-    public void nuevoUsuario(){
+
+    public void nuevoUsuario() {
         tipousuario = lnUsuario.findTipoUser(tipousuario.getIdtipoUsuario());
         usuarioaux.setTipoUsuario(tipousuario);
         lnUsuario.addUsuario(usuarioaux);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario creado con éxito", "El usuario ha sido creado exitosamente."));
-        usuarioaux=new Usuario();
+        usuarioaux = new Usuario();
     }
-    
+
     /**
      * Creates a new instance of AdUsuario
      */
-    
     public AdUsuario() {
-        usuario=new Usuario();
-        usuarioaux=new Usuario();
-        tipousuario=new TipoUsuario();
-        medico= new Medico();
-        departamento= new Departamento();
+        usuario = new Usuario();
+        usuarioaux = new Usuario();
+        tipousuario = new TipoUsuario();
+        medico = new Medico();
+        departamento = new Departamento();
     }
-    
+
 }

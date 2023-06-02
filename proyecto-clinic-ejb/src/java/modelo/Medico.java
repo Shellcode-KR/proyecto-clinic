@@ -51,6 +51,9 @@ public class Medico implements Serializable {
     @Size(max = 45)
     @Column(name = "cedula")
     private String cedula;
+    @Size(max = 10)
+    @Column(name = "telefono")
+    private String telefono;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,8 +61,6 @@ public class Medico implements Serializable {
     @Basic(optional = false)
     @Column(name = "idmedico")
     private Integer idmedico;
-    @Column(name = "telefono")
-    private Integer telefono;
     @JoinColumn(name = "id_departamento", referencedColumnName = "iddepartamento")
     @ManyToOne
     private Departamento idDepartamento;
@@ -104,13 +105,6 @@ public class Medico implements Serializable {
     }
 
 
-    public Integer getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
-    }
 
     public Departamento getIdDepartamento() {
         return idDepartamento;
@@ -168,8 +162,10 @@ public class Medico implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Medico[ idmedico=" + idmedico + " ]";
+        return nombre +  apellidoPaterno + apellidoMaterno ;
     }
+
+    
 
     public String getNombre() {
         return nombre;
@@ -179,13 +175,20 @@ public class Medico implements Serializable {
         this.nombre = nombre;
     }
 
-
     public String getCedula() {
         return cedula;
     }
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
     
 }

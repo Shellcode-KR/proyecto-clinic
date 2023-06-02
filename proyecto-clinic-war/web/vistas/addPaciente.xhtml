@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Nombre:" for="nombre" />
+                    <p:inputText required="true" requiredMessage="introduce un nombre" validatorMessage="nombre invalido" id="nombre" value="#{adPacientes.paciente.nombre}" title="Nombre" >
+                        <f:validator validatorId="espaciosEnBlancoValidator"/>
+                        <f:validateRegex  pattern="[a-zA-ZñÑáÁÉéÍíÓóÚú\s]{3,30}"  />
+                    </p:inputText>
+                    <p:outputLabel value="ApelllidoPaterno:" for="apelllidoPaterno" />
+                    <p:inputText required="true" requiredMessage="Introduce un apellido paterno" validatorMessage="Solo valores alfanumericos" id="apelllidoPaterno" value="#{adPacientes.paciente.apelllidoPaterno}" title="ApelllidoPaterno" >
+                        <f:validator validatorId="espaciosEnBlancoValidator"/>
+                        <f:validateRegex  pattern="[a-zA-ZñÑáaÁÉéÍíÓóÚú\s]{3,30}"  />
+                    </p:inputText>
+                    <p:outputLabel value="ApellidoMaterno:" for="apellidoMaterno" />
+                    <p:inputText required="true" requiredMessage="Introduce un apellido Materno" validatorMessage="Solo valores alfanumericos" id="apellidoMaterno" value="#{adPacientes.paciente.apellidoMaterno}" title="ApellidoMaterno" >
+                        <f:validator validatorId="espaciosEnBlancoValidator"/>
+                        <f:validateRegex  pattern="[a-zA-ZñÑáÁÉéÍíÓóÚú\s]{3,30}"  />
+                    </p:inputText>
+                    <p:outputLabel value="Direccion:" for="direccion" />
+                    <p:inputText required="true" requiredMessage="Introduce una direccion valida" validatorMessage="Solo caracteres alfanumericos" id="direccion" value="#{adPacientes.paciente.direccion}" title="Direccion" >
+                        <f:validator validatorId="espaciosEnBlancoValidator"/>
+                        <f:validateRegex  pattern="[0-9a-zA-ZñÑáÁÉéÍíÓóÚú\s]{3,30}"  />
+                    </p:inputText>
+                    <p:outputLabel value="Localidad:" for="localidad" />
+                    <p:inputText required="true" requiredMessage="introduce una localidad" validatorMessage="Solo caracteres alfanumericos" id="localidad" value="#{adPacientes.paciente.localidad}" title="Localidad" >
+                        <f:validator validatorId="espaciosEnBlancoValidator"/>
+                        <f:validateRegex  pattern="[a-zA-ZñÑáÁÉéÍíÓóÚú\s]{3,30}"  />
+                    </p:inputText>
+                    <p:outputLabel value="CodigoPostal:" for="codigoPostal" />
+                    <p:inputText required="true" requiredMessage="Introduce un codigo postal" validatorMessage="Solo 5 numeros" id="codigoPostal" value="#{adPacientes.paciente.codigoPostal}" title="CodigoPostal" >
+                        <f:validateRegex pattern="[0-9]{5}" />
+                    </p:inputText>
+                    <p:outputLabel value="Estado:" for="estado" />
+                    <p:inputText required="true" requiredMessage="Introduce el estado de la republica" validatorMessage="Estado Invalido" id="estado" value="#{adPacientes.paciente.estado}" title="Estado" >
+                    <f:validator validatorId="espaciosEnBlancoValidator"/>
+                        <f:validateRegex  pattern="[a-zA-ZñÑáÁÉéÍíÓóÚú\s]{3,30}"  />
+                    </p:inputText>
+                    <p:outputLabel value="Telefono:" for="telefono" />
+                    <p:inputText required="true" requiredMessage="Inroduce un telefono" validatorMessage="Telefono Invalido" id="telefono" value="#{adPacientes.paciente.telefono}" title="Telefono" >
+                        <f:validateRegex pattern="[0-9]{10}" />
+                    </p:inputText>
+                </p:panelGrid>
+                <p:messages />
+                <h:commandButton actionListener="#{adPacientes.nuevoPaciente()}" value="Registrar" />
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>

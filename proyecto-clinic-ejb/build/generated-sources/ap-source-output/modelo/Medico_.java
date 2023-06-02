@@ -8,7 +8,7 @@ import modelo.Cita;
 import modelo.Departamento;
 import modelo.Usuario;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-06-01T20:37:10")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-06-02T03:35:57")
 @StaticMetamodel(Medico.class)
 public class Medico_ { 
 
@@ -17,7 +17,7 @@ public class Medico_ {
     public static volatile ListAttribute<Medico, Departamento> departamentoList;
     public static volatile SingularAttribute<Medico, String> cedula;
     public static volatile SingularAttribute<Medico, Usuario> idUsuario;
-    public static volatile SingularAttribute<Medico, Integer> telefono;
+    public static volatile SingularAttribute<Medico, String> telefono;
     public static volatile SingularAttribute<Medico, String> nombre;
     public static volatile SingularAttribute<Medico, Integer> idmedico;
     public static volatile ListAttribute<Medico, Cita> citaList;

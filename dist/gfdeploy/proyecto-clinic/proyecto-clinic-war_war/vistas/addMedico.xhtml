@@ -53,11 +53,11 @@
                         <f:validateRegex  pattern="[a-zA-ZñÑáÁÉéÍíÓóÚú\s]{3,30}"  />
                     </p:inputText>
                     <p:outputLabel value="Telefono:" for="telefono" />
-                    <p:inputText required="true" requiredMessage="Introduce telefono" validatorMessage="Teléfono no válido. Debe contener 10 dígitos numéricos" id="telefono" value="#{adUsuario.medico.telefono}" title="Telefono" >
-                        
-                        <f:convertNumber integerOnly="true" />
+                    <p:inputText required="true" requiredMessage="Introduce telefono" validatorMessage="Teléfono no válido. Debe contener 10 dígitos numéricos" id="telefono" value="#{adUsuario.medico.telefono}" title="Telefono">
+                        <f:validator validatorId="espaciosEnBlancoValidator"/>
                         <f:validateRegex pattern="\d{10}" />
                     </p:inputText>
+
                     <p:outputLabel value="IdDepartamento:" for="idDepartamento" />
                     <p:selectOneMenu required="true" requiredMessage="selecciona uno" id="idDepartamento" value="#{adUsuario.departamento.iddepartamento}" >
                         <!-- TODO: update below reference to list of available items-->

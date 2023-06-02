@@ -6,6 +6,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,12 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Paciente.findByTelefono", query = "SELECT p FROM Paciente p WHERE p.telefono = :telefono")})
 public class Paciente implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idpaciente")
-    private Integer idpaciente;
     @Size(max = 45)
     @Column(name = "nombre")
     private String nombre;
@@ -61,13 +56,22 @@ public class Paciente implements Serializable {
     @Size(max = 45)
     @Column(name = "localidad")
     private String localidad;
+    @Size(max = 5)
     @Column(name = "codigo_postal")
-    private Integer codigoPostal;
+    private String codigoPostal;
     @Size(max = 45)
     @Column(name = "estado")
     private String estado;
+    @Size(max = 10)
     @Column(name = "telefono")
-    private Integer telefono;
+    private String telefono;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idpaciente")
+    private Integer idpaciente;
     @OneToMany(mappedBy = "idPaciente")
     private List<Cita> citaList;
 
@@ -86,13 +90,6 @@ public class Paciente implements Serializable {
         this.idpaciente = idpaciente;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getApelllidoPaterno() {
         return apelllidoPaterno;
@@ -110,45 +107,8 @@ public class Paciente implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public Integer getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public void setCodigoPostal(Integer codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Integer getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
-    }
 
     @XmlTransient
     public List<Cita> getCitaList() {
@@ -167,21 +127,79 @@ public class Paciente implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Paciente)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Paciente other = (Paciente) object;
-        if ((this.idpaciente == null && other.idpaciente != null) || (this.idpaciente != null && !this.idpaciente.equals(other.idpaciente))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Paciente other = (Paciente) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apelllidoPaterno, other.apelllidoPaterno)) {
+            return false;
+        }
+        return Objects.equals(this.idpaciente, other.idpaciente);
     }
 
     @Override
     public String toString() {
-        return "modelo.Paciente[ idpaciente=" + idpaciente + " ]";
+        return nombre + apelllidoPaterno+ apellidoMaterno ;
+    }
+
+   
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
     
 }

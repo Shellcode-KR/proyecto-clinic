@@ -33,15 +33,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TipoUsuario.findByTipoUsuario", query = "SELECT t FROM TipoUsuario t WHERE t.tipoUsuario = :tipoUsuario")})
 public class TipoUsuario implements Serializable {
 
+    @Size(max = 45)
+    @Column(name = "tipo_usuario")
+    private String tipoUsuario;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idtipo_usuario")
     private Integer idtipoUsuario;
-    @Size(max = 45)
-    @Column(name = "tipo_usuario")
-    private String tipoUsuario;
     @OneToMany(mappedBy = "tipoUsuario")
     private List<Usuario> usuarioList;
 
@@ -101,5 +102,5 @@ public class TipoUsuario implements Serializable {
     public String toString() {
         return "modelo.TipoUsuario[ idtipoUsuario=" + idtipoUsuario + " ]";
     }
-    
+
 }

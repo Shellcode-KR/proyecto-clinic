@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1>Lista de Servicios por departamento</h1>
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel value="Selecciona el Departamento:" for="departamento" />
+                    <p:selectOneMenu required="true" requiredMessage="Selecciona un departamento" id="departamento" value="#{adServicioDep.departamento.iddepartamento}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel="Selecciona un departamento" itemDisabled="true" itemValue="#{null}" noSelectionOption="true"  />
+                        <f:selectItems value="#{adDepartamentos.departamentosdata}" var="vdepartamento" itemLabel="#{vdepartamento.nombreDepartamento}" itemValue="#{vdepartamento.iddepartamento}" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:messages />
+                <h:commandButton actionListener="#{adServicioDep.listaServicioDepartamento()}" value="Listar Servicio" />
+                
+            </h:form>
+        </f:view>
+
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{adServicioDep.serviciosDepartamento}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idservicios"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idservicios}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Departamento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.departamento.nombreDepartamento}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Servicio"/>
+                        </f:facet>
+                        <h:outputText value="#{item.servicio}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Costo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.costo}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>

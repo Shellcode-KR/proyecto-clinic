@@ -10,7 +10,7 @@ import modelo.Paciente;
 import modelo.Pago;
 import modelo.Servicios;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-06-01T12:12:15")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-06-01T20:37:10")
 @StaticMetamodel(Cita.class)
 public class Cita_ { 
 

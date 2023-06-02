@@ -4,9 +4,11 @@
  */
 package accesodatos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import modelo.Medico;
 
 /**
@@ -28,4 +30,11 @@ public class MedicoFacade extends AbstractFacade<Medico> {
         super(Medico.class);
     }
     
+
+    public List<Medico> medicosByDepa(int departamentoId) {
+        TypedQuery<Medico> query = em.createQuery(
+                "SELECT m FROM Medico m WHERE m.idDepartamento = :departamentoId", Medico.class);
+        query.setParameter("departamentoId", departamentoId);
+        return query.getResultList();
+    }
 }

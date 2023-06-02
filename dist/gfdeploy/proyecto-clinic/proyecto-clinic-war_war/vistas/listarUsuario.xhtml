@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h1>Lista de usuarios </h1>
+        <f:view>
+            <h:form>
+                <p:outputLabel value="TipoUsuario:" for="tipoUsuario" />
+                <p:selectOneMenu required="true" requiredMessage="Selecciona un tipo de usuario" id="tipoUsuario" value="#{adUsuario.tipousuario.idtipoUsuario}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel="Tipo Usuario" itemDisabled="true" itemValue="#{null}" noSelectionOption="true"  />
+                        <f:selectItems value="#{adUsuario.recuperartipos}" var="vtipo" itemLabel="#{vtipo.tipoUsuario}" itemValue="#{vtipo.idtipoUsuario}"    />
+                    </p:selectOneMenu>
+                <h:commandButton actionListener="#{adUsuario.listatablatipo()}" value="Listar Usuarios" />
+            </h:form>
+            <p:messages />
+        </f:view>
+        
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{adUsuario.usuariostipo}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idusuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idusuario}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Usuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usuario}"/>
+                    </p:column>
+<!--                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Contrasena"/>
+                        </f:facet>
+                        <h:outputText value="#{item.contrasena}"/>
+                    </p:column>-->
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Email"/>
+                        </f:facet>
+                        <h:outputText value="#{item.email}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="TipoUsuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoUsuario}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+
+    </h:body>
+</html>

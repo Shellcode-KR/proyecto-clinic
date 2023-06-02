@@ -126,6 +126,6 @@ public class Departamento implements Serializable {
     public String toString() {
         return "modelo.Departamento[ iddepartamento=" + iddepartamento + " ]";
     }
-
+    
     
 }

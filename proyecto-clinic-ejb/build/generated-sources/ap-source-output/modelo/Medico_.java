@@ -8,7 +8,7 @@ import modelo.Cita;
 import modelo.Departamento;
 import modelo.Usuario;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-06-01T12:12:15")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-06-01T20:37:10")
 @StaticMetamodel(Medico.class)
 public class Medico_ { 
 

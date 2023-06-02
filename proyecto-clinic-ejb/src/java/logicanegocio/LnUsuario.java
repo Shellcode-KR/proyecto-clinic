@@ -4,11 +4,13 @@
  */
 package logicanegocio;
 
+import accesodatos.TipoUsuarioFacade;
 import accesodatos.UsuarioFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.TipoUsuario;
 import modelo.Usuario;
 
 /**
@@ -20,8 +22,17 @@ import modelo.Usuario;
 public class LnUsuario {
 
     @EJB
-    private UsuarioFacade usuarioFacade;
+    private TipoUsuarioFacade tipoUsuarioFacade;
 
+    @EJB
+    private UsuarioFacade usuarioFacade;
+    public List<TipoUsuario> getTipoUsuarios(){
+        return tipoUsuarioFacade.findAll();
+    }
+    public TipoUsuario findTipoUser(int idTipoUser){
+        return tipoUsuarioFacade.find(idTipoUser);
+    }
+    
     public void addUsuario(Usuario u){
         usuarioFacade.create(u);
     }
@@ -37,5 +48,11 @@ public class LnUsuario {
     }
     public List<Usuario> getUsuariobyTipo(int tipousuario){
         return usuarioFacade.getUsuariosbyTipo(tipousuario);
+    }
+    public Usuario findUsuarioBynombre(String nombre){
+        return usuarioFacade.getUsuarioByUsername(nombre);
+    }
+    public Usuario getUltimoUsuario(){
+        return usuarioFacade.getUltimoUsuario();
     }
 }
